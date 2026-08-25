@@ -10,9 +10,6 @@ obj/
 
 # Node
 node_modules/
-.env
-.env.local
-.env.*
 
 
 # Build
@@ -33,3 +30,4 @@ Thumbs.db
 
 # Logs
 *.log
+config.bat

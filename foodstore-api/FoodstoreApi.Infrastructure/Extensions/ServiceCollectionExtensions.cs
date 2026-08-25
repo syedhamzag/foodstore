@@ -1,6 +1,8 @@
+using FoodstoreApi.Infrastructure.Data;
 using FoodstoreApi.Infrastructure.Handlers;
 using FoodstoreApi.Infrastructure.Repositories;
 using FoodstoreApi.Usecase.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +12,9 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddDbContext<StoreDbContext>(options =>
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IMenuItemRepository, MenuItemRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
