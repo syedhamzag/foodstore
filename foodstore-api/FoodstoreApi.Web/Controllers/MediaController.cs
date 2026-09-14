@@ -1,4 +1,4 @@
-﻿using FoodstoreApi.Web.Authorization;
+using FoodstoreApi.Web.Authorization;
 using FoodstoreApi.Web.Extensions;
 using FoodstoreApi.Usecase.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -129,7 +129,7 @@ public class MediaController : ControllerBase
 
         return ApiResult.Success(new
         {
-            message = $"Đã xóa {deletedCount} ảnh không sử dụng",
+            message = $"Deleted {deletedCount} unused photos.",
             deletedCount,
             errors
         });

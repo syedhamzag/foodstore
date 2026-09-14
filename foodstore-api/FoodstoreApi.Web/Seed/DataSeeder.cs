@@ -20,9 +20,9 @@ public static class DataSeeder
         if (!await context.Sources.AnyAsync())
         {
             context.Sources.AddRange(
-                new Source { Name = "Tại quầy", IsActive = true },
-                new Source { Name = "Mang về", IsActive = true },
-                new Source { Name = "Giao hàng", IsActive = true },
+                new Source { Name = "Dine In", IsActive = true },
+                new Source { Name = "Take Away", IsActive = true },
+                new Source { Name = "Delivery", IsActive = true },
                 new Source { Name = "Online", IsActive = true }
             );
             await context.SaveChangesAsync();
@@ -36,7 +36,7 @@ public static class DataSeeder
             rootRole = new ApplicationRole
             {
                 Name = "root",
-                Description = "Quản trị viên tối cao — toàn quyền hệ thống",
+                Description = "Super Administrator — full system privileges",
                 DefaultRoute = "/admin",
                 IsSystem = true,
                 CreatedAt = now,
@@ -59,7 +59,7 @@ public static class DataSeeder
             customerRole = new ApplicationRole
             {
                 Name = "customer",
-                Description = "Khách hàng mặc định",
+                Description = "Default customer",
                 DefaultRoute = "/",
                 IsSystem = true,
                 CreatedAt = now,

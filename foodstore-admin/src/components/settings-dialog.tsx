@@ -193,13 +193,13 @@ export function SettingsDialog({
                     className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:pointer-events-none"
                   >
                     {saving && <Loader2Icon className="size-4 animate-spin" />}
-                    Lưu thay đổi
+                    Save thay đổi
                   </button>
                   <button
                     onClick={onClose}
                     className="inline-flex items-center justify-center gap-2 rounded-lg border bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent transition-colors"
                   >
-                    Hủy
+                    Cancel
                   </button>
                 </div>
               </div>

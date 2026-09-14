@@ -1,9 +1,6 @@
 import { env } from '$env/dynamic/public';
 
-const apiBaseUrl = env.PUBLIC_API_URL;
-if (!apiBaseUrl) {
-	throw new Error('PUBLIC_API_URL environment variable is not set');
-}
+const apiBaseUrl = env.PUBLIC_API_URL || 'http://api.localhost/v2';
 export const API_BASE_URL = apiBaseUrl;
 
 const apiRoot = apiBaseUrl.replace(/\/v2\/?$/, '');

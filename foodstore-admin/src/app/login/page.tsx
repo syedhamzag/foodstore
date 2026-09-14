@@ -45,9 +45,9 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-black px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Foodstore</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">Eshu Grill House</CardTitle>
           <CardDescription className="text-center">
-            Đăng nhập để truy cập trang quản trị
+            Log in to access the admin portal.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -60,24 +60,24 @@ export default function LoginPage() {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="username">Tên đăng nhập</Label>
+              <Label htmlFor="username">Username</Label>
               <Input
                 id="username"
                 name="username"
                 type="text"
-                placeholder="Nhập tên đăng nhập"
+                placeholder="Enter username"
                 required
                 autoComplete="username"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Mật khẩu</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 name="password"
                 type="password"
-                placeholder="Nhập mật khẩu"
+                placeholder="Enter password"
                 required
                 autoComplete="current-password"
               />
@@ -87,10 +87,10 @@ export default function LoginPage() {
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Đang đăng nhập...
+                  Logging in...
                 </>
               ) : (
-                "Đăng nhập"
+                "Log in"
               )}
             </Button>
           </form>

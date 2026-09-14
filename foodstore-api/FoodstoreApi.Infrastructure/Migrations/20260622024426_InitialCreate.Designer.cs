@@ -49,7 +49,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(10,0)")
@@ -87,14 +87,14 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
                         .HasColumnName("description")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("uuid")
@@ -155,7 +155,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("text")
                         .HasColumnName("content")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
@@ -169,7 +169,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)")
                         .HasColumnName("excerpt")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("FocusKeyword")
                         .HasMaxLength(100)
@@ -260,7 +260,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
                         .HasColumnName("title")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone")
@@ -525,7 +525,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
                         .HasColumnName("description")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(500)
@@ -541,7 +541,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone")
@@ -579,7 +579,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)")
                         .HasColumnName("description")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(500)
@@ -595,7 +595,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone")
@@ -764,7 +764,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("timestamp without time zone")
@@ -815,13 +815,13 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)")
                         .HasColumnName("buyer_address")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("BuyerName")
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
                         .HasColumnName("buyer_name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("BuyerTaxCode")
                         .HasMaxLength(20)
@@ -952,7 +952,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
                         .HasColumnName("description")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean")
@@ -963,7 +963,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("ProviderType")
                         .IsRequired()
@@ -1356,7 +1356,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)")
                         .HasColumnName("description")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(500)
@@ -1372,7 +1372,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(10,0)")
@@ -1477,7 +1477,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)")
                         .HasColumnName("note")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("OrderCode")
                         .IsRequired()
@@ -1572,13 +1572,13 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
                         .HasColumnName("menu_item_name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("Note")
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
                         .HasColumnName("note")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid")
@@ -1631,7 +1631,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("addon_name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
@@ -1698,7 +1698,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)")
                         .HasColumnName("note")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid")
@@ -1806,7 +1806,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("bank_name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
@@ -1920,7 +1920,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
                         .HasColumnName("name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone")
@@ -1962,14 +1962,14 @@ namespace FoodstoreApi.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
                         .HasColumnName("description")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("name")
-                        .UseCollation("vi_ci_ai");
+                        ;
 
                     b.Property<string>("Slug")
                         .IsRequired()
@@ -2585,3 +2585,4 @@ namespace FoodstoreApi.Infrastructure.Migrations
         }
     }
 }
+

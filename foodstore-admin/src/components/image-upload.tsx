@@ -29,7 +29,7 @@ export function ImageUpload({ value, onChange, onUpload, className }: ImageUploa
     if (!file) return
 
     if (file.size > 5 * 1024 * 1024) {
-      alert("File quá lớn. Vui lòng chọn file dưới 5MB.")
+      alert("File is too large. Please select a file below 5MB.")
       return
     }
 
@@ -94,9 +94,9 @@ export function ImageUpload({ value, onChange, onUpload, className }: ImageUploa
           className="gap-1.5"
         >
           <Upload className="size-3.5" />
-          {uploading ? "Đang tải..." : "Chọn ảnh"}
+          {uploading ? "Loading..." : "Select photo"}
         </Button>
-        <p className="mt-1 text-xs text-muted-foreground">PNG, JPG, WEBP tối đa 5MB</p>
+        <p className="mt-1 text-xs text-muted-foreground">PNG, JPG, WEBP maximum 5MB</p>
       </div>
     </div>
   )

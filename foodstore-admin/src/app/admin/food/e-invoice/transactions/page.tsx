@@ -19,10 +19,10 @@ import { formatCurrency, formatDateTime } from "@/lib/utils"
 import type { EInvoice, CancelInvoiceDto } from "@/lib/types"
 
 const STATUS_MAP: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
-  draft: { label: "Nháp", variant: "secondary" },
-  issued: { label: "Đã phát hành", variant: "default" },
-  failed: { label: "Thất bại", variant: "destructive" },
-  cancelled: { label: "Đã hủy", variant: "outline" },
+  draft: { label: "Draft", variant: "secondary" },
+issued: { label: "Issued", variant: "default" },
+failed: { label: "Failed", variant: "destructive" },
+cancelled: { label: "Cancelled", variant: "outline" },
 }
 
 export default function EInvoiceTransactionsPage() {
@@ -36,7 +36,7 @@ export default function EInvoiceTransactionsPage() {
   const loadData = React.useCallback(async () => {
     setLoading(true)
     try { const res = await eInvoiceService.getAllInvoices(); setData(res) }
-    catch { toast.error("Không thể tải danh sách hóa đơn") }
+    catch { toast.error("Unable to load the invoice list.") }
     finally { setLoading(false) }
   }, [])
 
@@ -45,26 +45,26 @@ export default function EInvoiceTransactionsPage() {
   const openCancel = (item: EInvoice) => { setCancelTarget(item); setCancelReason(""); setCancelOpen(true) }
 
   const handleCancel = async () => {
-    if (!cancelTarget || !cancelReason.trim()) { toast.error("Vui lòng nhập lý do hủy"); return }
+    if (!cancelTarget || !cancelReason.trim()) { toast.error("Please enter the reason for cancellation."); return }
     setCancelling(true)
     try {
       await eInvoiceService.cancelInvoice(cancelTarget.id, { reason: cancelReason.trim() } as CancelInvoiceDto)
-      toast.success("Hủy hóa đơn thành công")
+      toast.success("Invoice successfully cancelled.")
       setCancelOpen(false); loadData()
     } catch (e) { toast.error((e as Error).message) }
     finally { setCancelling(false) }
   }
 
   const columns: ColumnDef<EInvoice>[] = [
-    { id: "invoiceNumber", accessorKey: "invoiceNumber", header: "Số HĐ" },
-    { id: "orderCode", accessorKey: "orderCode", header: "Mã đơn" },
-    { id: "buyerName", accessorKey: "buyerName", header: "Người mua" },
-    { id: "totalAmount", header: "Tổng tiền", cell: ({ row }) => formatCurrency(row.original.totalAmount) },
-    { id: "status", header: "Trạng thái", cell: ({ row }) => {
+    { id: "invoiceNumber", accessorKey: "invoiceNumber", header: "Invoice Number" }, 
+{ id: "orderCode", accessorKey: "orderCode", header: "OrderCode" }, 
+{ id: "buyerName", accessorKey: "buyerName", header: "Buyer" }, 
+{ id: "totalAmount", header: "Total Amount", cell: ({ row }) => formatCurrency(row.original.totalAmount) }, 
+{ id: "status", header: "Status", cell: ({ row }) => {
       const s = STATUS_MAP[row.original.status] ?? { label: row.original.status, variant: "outline" as const }
       return <Badge variant={s.variant}>{s.label}</Badge>
     }},
-    { id: "createdAt", header: "Ngày tạo", cell: ({ row }) => formatDateTime(row.original.createdAt) },
+    { id: "createdAt", header: "Created At", cell: ({ row }) => formatDateTime(row.original.createdAt) },
     { id: "actions", header: "", cell: ({ row }) => (
       <div className="flex justify-end gap-1">
         {row.original.pdfUrl && (
@@ -74,7 +74,7 @@ export default function EInvoiceTransactionsPage() {
           </a>
         )}
         {row.original.status === "issued" && (
-          <Button variant="ghost" size="icon-sm" title="Hủy hóa đơn" onClick={() => openCancel(row.original)}>
+          <Button variant="ghost" size="icon-sm" title="Cancel invoice" onClick={() => openCancel(row.original)}>
             <Ban className="size-4 text-destructive" />
           </Button>
         )}
@@ -88,21 +88,21 @@ export default function EInvoiceTransactionsPage() {
         <div className="flex items-center gap-2 px-4">
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />
-          <Breadcrumb><BreadcrumbList><BreadcrumbItem><BreadcrumbPage>Giao dịch HĐĐT</BreadcrumbPage></BreadcrumbItem></BreadcrumbList></Breadcrumb>
+          <Breadcrumb><BreadcrumbList><BreadcrumbItem><BreadcrumbPage>E-invoice transactions</BreadcrumbPage></BreadcrumbItem></BreadcrumbList></Breadcrumb>
         </div>
       </header>
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <DataTable columns={columns} data={data} searchKey="invoiceNumber" searchPlaceholder="Tìm hóa đơn..." loading={loading} />
+        <DataTable columns={columns} data={data} searchKey="invoiceNumber" searchPlaceholder="Find invoice..." loading={loading} />
       </div>
-      <CrudSheet open={cancelOpen} onOpenChange={setCancelOpen} title="Hủy hóa đơn điện tử"
-        onSubmit={handleCancel} submitting={cancelling} submitLabel="Xác nhận hủy">
+      <CrudSheet open={cancelOpen} onOpenChange={setCancelOpen} title="Cancel e-invoice"
+        onSubmit={handleCancel} submitting={cancelling} submitLabel="Confirm Cancellation">
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">
-            Bạn có chắc muốn hủy hóa đơn <strong>{cancelTarget?.invoiceNumber}</strong> của đơn <strong>{cancelTarget?.orderCode}</strong>?
+             Are you sure you want to cancel the invoice?<strong>{cancelTarget?.invoiceNumber}</strong> of the application <strong>{cancelTarget?.orderCode}</strong>?
           </p>
           <div className="space-y-2">
-            <Label htmlFor="cancelReason">Lý do hủy</Label>
-            <Input id="cancelReason" value={cancelReason} onChange={(e) => setCancelReason(e.target.value)} placeholder="Nhập lý do hủy hóa đơn..." />
+            <Label htmlFor="cancelReason">Reason for Cancellation</Label>
+            <Input id="cancelReason" value={cancelReason} onChange={(e) => setCancelReason(e.target.value)} placeholder="Enter the reason for cancelling the invoice...." />
           </div>
         </div>
       </CrudSheet>

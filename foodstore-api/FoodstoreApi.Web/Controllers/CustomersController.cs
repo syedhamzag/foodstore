@@ -135,7 +135,7 @@ public class CustomersController : ControllerBase
     public async Task<IActionResult> AddPoints(Guid id, [FromBody] AddPointsDto dto)
     {
         if (dto.Points <= 0)
-            return ApiResult.BadRequest("Số điểm phải lớn hơn 0");
+            return ApiResult.BadRequest("The number of points must be larger than 0");
 
         var ok = await _customerService.AddPointsAsync(id, dto.Points, dto.Reason);
         if (!ok) return ApiResult.NotFound();

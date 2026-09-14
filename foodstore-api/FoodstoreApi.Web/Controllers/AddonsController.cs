@@ -1,4 +1,4 @@
-﻿using FoodstoreApi.Usecase.Interfaces;
+using FoodstoreApi.Usecase.Interfaces;
 using FoodstoreApi.Web.Authorization;
 using FoodstoreApi.Usecase.DTOs.Addon;
 using Microsoft.AspNetCore.Authorization;
@@ -68,7 +68,7 @@ public class AddonsController(IAddonService service) : ControllerBase
         }
         catch (Exception)
         {
-            return ApiResult.BadRequest("Không thể xóa topping này vì đang được sử dụng trong đơn hàng.");
+            return ApiResult.BadRequest("This topping cannot be deleted because it is currently being used in an order.");
         }
     }
 }

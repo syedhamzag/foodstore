@@ -77,6 +77,10 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(JwtSett
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 
+// Suppress pending model changes warning
+builder.Services.AddDbContext<StoreDbContext>(options => 
+    options.ConfigureWarnings(w => w.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning)));
+
 var jwtSettings = builder.Configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>()
     ?? throw new InvalidOperationException("JwtSettings not configured");
 
@@ -168,6 +172,16 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v2", new OpenApiInfo
+    {
+        Title = "Food Store",
+        Version = "v2"
+    });
+});
+
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
@@ -177,20 +191,17 @@ app.UseMiddleware<SecurityHeadersMiddleware>();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<StoreDbContext>();
-    await db.Database.ExecuteSqlRawAsync("CREATE COLLATION IF NOT EXISTS vi_ci_ai (LOCALE = 'vi-VN-x-icu', PROVIDER = 'icu');");
+    //await db.Database.ExecuteSqlRawAsync("CREATE COLLATION IF NOT EXISTS vi_ci_ai (LOCALE = 'vi-VN-x-icu', PROVIDER = 'icu');");
     await db.Database.MigrateAsync();
     await DataSeeder.SeedAsync(scope.ServiceProvider);
 }
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v2/swagger.json", "Foodstore API v2");
-        c.RoutePrefix = "swagger";
-    });
-}
+    c.SwaggerEndpoint("/swagger/v2/swagger.json", "Foodstore API v2");
+    c.RoutePrefix = "swagger";
+});
 
 app.UseCors("CorsPolicy");
 app.UseRateLimiter();

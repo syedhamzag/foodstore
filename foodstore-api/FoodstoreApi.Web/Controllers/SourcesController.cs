@@ -1,4 +1,4 @@
-﻿using FoodstoreApi.Usecase.Interfaces;
+using FoodstoreApi.Usecase.Interfaces;
 using FoodstoreApi.Web.Authorization;
 using FoodstoreApi.Usecase.DTOs.Source;
 using Microsoft.AspNetCore.Authorization;
@@ -69,7 +69,7 @@ public class SourcesController(ISourceService service, IHubContext<AppHub> hubCo
         }
         catch (Exception)
         {
-            return ApiResult.BadRequest("Không thể xóa nguồn này vì đang có đơn hàng liên kết.");
+            return ApiResult.BadRequest("This source cannot be deleted because there is an existing linked order.");
         }
     }
 }

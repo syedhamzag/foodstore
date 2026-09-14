@@ -146,8 +146,8 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.ToTable("categories");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name").UseCollation("vi_ci_ai");
-            entity.Property(e => e.Description).HasMaxLength(255).HasColumnName("description").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name");
+            entity.Property(e => e.Description).HasMaxLength(255).HasColumnName("description");
             entity.Property(e => e.ImageUrl).HasMaxLength(500).HasColumnName("image_url");
             entity.Property(e => e.IsActive).HasColumnName("is_active");
             entity.ConfigureAudit();
@@ -160,8 +160,8 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
-            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name").UseCollation("vi_ci_ai");
-            entity.Property(e => e.Description).HasMaxLength(500).HasColumnName("description").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name");
+            entity.Property(e => e.Description).HasMaxLength(500).HasColumnName("description");
             entity.Property(e => e.Price).HasColumnType("decimal(10,0)").HasColumnName("price");
             entity.Property(e => e.ImageUrl).HasMaxLength(500).HasColumnName("image_url");
             entity.Property(e => e.IsActive).HasColumnName("is_active");
@@ -179,7 +179,7 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.ToTable("addons");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name");
             entity.Property(e => e.Price).HasColumnType("decimal(10,0)").HasColumnName("price");
             entity.Property(e => e.IsActive).HasColumnName("is_active");
             entity.ConfigureAudit();
@@ -216,9 +216,9 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.ToTable("combos");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name");
             entity.Property(e => e.ComboPrice).HasColumnType("decimal(10,0)").HasColumnName("combo_price");
-            entity.Property(e => e.Description).HasMaxLength(500).HasColumnName("description").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Description).HasMaxLength(500).HasColumnName("description");
             entity.Property(e => e.ImageUrl).HasMaxLength(500).HasColumnName("image_url");
             entity.Property(e => e.IsActive).HasColumnName("is_active");
             entity.ConfigureAudit();
@@ -255,7 +255,7 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Code).HasMaxLength(50).HasColumnName("code");
-            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name");
             entity.Property(e => e.Type).HasMaxLength(10).HasColumnName("type");
             entity.Property(e => e.Value).HasColumnType("decimal(10,2)").HasColumnName("value");
             entity.Property(e => e.MaxDiscountAmount).HasColumnType("decimal(10,0)").HasColumnName("max_discount_amount");
@@ -275,7 +275,7 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.ToTable("sources");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Name).HasMaxLength(50).HasColumnName("name").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Name).HasMaxLength(50).HasColumnName("name");
             entity.Property(e => e.IsActive).HasColumnName("is_active");
             entity.ConfigureAudit();
         });
@@ -298,7 +298,7 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.Property(e => e.QrPaymentUrl).HasColumnName("qr_payment_url");
             entity.Property(e => e.PaidAt).HasColumnName("paid_at");
             entity.Property(e => e.Status).HasMaxLength(20).HasColumnName("status");
-            entity.Property(e => e.Note).HasMaxLength(500).HasColumnName("note").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Note).HasMaxLength(500).HasColumnName("note");
             entity.Property(e => e.PrintedAt).HasColumnName("printed_at");
             entity.ConfigureAudit();
 
@@ -339,11 +339,11 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.Property(e => e.OrderId).HasColumnName("order_id");
             entity.Property(e => e.MenuItemId).HasColumnName("menu_item_id");
             entity.Property(e => e.ComboId).HasColumnName("combo_id");
-            entity.Property(e => e.MenuItemName).HasMaxLength(255).HasColumnName("menu_item_name").UseCollation("vi_ci_ai");
+            entity.Property(e => e.MenuItemName).HasMaxLength(255).HasColumnName("menu_item_name");
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10,0)").HasColumnName("unit_price");
             entity.Property(e => e.Quantity).HasColumnName("quantity");
             entity.Property(e => e.TotalPrice).HasColumnType("decimal(10,0)").HasColumnName("total_price");
-            entity.Property(e => e.Note).HasMaxLength(255).HasColumnName("note").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Note).HasMaxLength(255).HasColumnName("note");
             entity.ConfigureAudit();
 
             entity.HasOne(e => e.Order)
@@ -370,7 +370,7 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.OrderItemId).HasColumnName("order_item_id");
             entity.Property(e => e.AddonId).HasColumnName("addon_id");
-            entity.Property(e => e.AddonName).HasMaxLength(100).HasColumnName("addon_name").UseCollation("vi_ci_ai");
+            entity.Property(e => e.AddonName).HasMaxLength(100).HasColumnName("addon_name");
             entity.Property(e => e.Quantity).HasColumnName("quantity");
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10,0)").HasColumnName("unit_price");
             entity.Property(e => e.TotalPrice).HasColumnType("decimal(10,0)").HasColumnName("total_price");
@@ -398,7 +398,7 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.Property(e => e.ToStatus).HasMaxLength(20).HasColumnName("to_status");
             entity.Property(e => e.ChangedBy).HasColumnName("changed_by");
             entity.Property(e => e.ChangedAt).HasColumnName("changed_at");
-            entity.Property(e => e.Note).HasMaxLength(500).HasColumnName("note").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Note).HasMaxLength(500).HasColumnName("note");
 
             entity.HasOne(e => e.Order)
                 .WithMany(o => o.OrderStatusHistories)
@@ -439,7 +439,7 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.BankId).HasMaxLength(50).HasColumnName("bank_id");
             entity.Property(e => e.BankAccount).HasMaxLength(50).HasColumnName("bank_account");
-            entity.Property(e => e.BankName).HasMaxLength(100).HasColumnName("bank_name").UseCollation("vi_ci_ai");
+            entity.Property(e => e.BankName).HasMaxLength(100).HasColumnName("bank_name");
             entity.Property(e => e.BankAccountName).HasMaxLength(200).HasColumnName("bank_account_name");
             entity.Property(e => e.Template).HasMaxLength(20).HasColumnName("template").HasDefaultValue("compact2");
             entity.Property(e => e.IsActive).HasColumnName("is_active");
@@ -453,10 +453,10 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.ToTable("blog_posts");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Title).HasMaxLength(255).HasColumnName("title").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Title).HasMaxLength(255).HasColumnName("title");
             entity.Property(e => e.Slug).HasMaxLength(255).HasColumnName("slug");
-            entity.Property(e => e.Excerpt).HasMaxLength(500).HasColumnName("excerpt").UseCollation("vi_ci_ai");
-            entity.Property(e => e.Content).HasColumnName("content").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Excerpt).HasMaxLength(500).HasColumnName("excerpt");
+            entity.Property(e => e.Content).HasColumnName("content");
             entity.Property(e => e.ThumbnailUrl).HasMaxLength(500).HasColumnName("thumbnail_url");
             entity.Property(e => e.Status).HasMaxLength(20).HasColumnName("status").HasDefaultValue("draft");
             entity.Property(e => e.AuthorId).HasColumnName("author_id");
@@ -496,9 +496,9 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.ToTable("tags");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name");
             entity.Property(e => e.Slug).HasMaxLength(100).HasColumnName("slug");
-            entity.Property(e => e.Description).HasMaxLength(255).HasColumnName("description").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Description).HasMaxLength(255).HasColumnName("description");
             entity.Property(e => e.Color).HasMaxLength(7).HasColumnName("color").HasDefaultValue("#f59e0b");
             entity.ConfigureAudit();
             entity.HasIndex(e => e.Slug).IsUnique();
@@ -560,9 +560,9 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.ToTable("blog_categories");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name");
             entity.Property(e => e.Slug).HasMaxLength(100).HasColumnName("slug");
-            entity.Property(e => e.Description).HasMaxLength(255).HasColumnName("description").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Description).HasMaxLength(255).HasColumnName("description");
             entity.Property(e => e.ParentId).HasColumnName("parent_id");
             entity.Property(e => e.SortOrder).HasColumnName("sort_order").HasDefaultValue(0);
             entity.ConfigureAudit();
@@ -662,11 +662,11 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.ToTable("e_invoice_providers");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Name).HasMaxLength(100).HasColumnName("name");
             entity.Property(e => e.ProviderType).HasMaxLength(50).HasColumnName("provider_type");
             entity.Property(e => e.IsActive).HasColumnName("is_active");
             entity.Property(e => e.ConfigJson).HasColumnName("config_json");
-            entity.Property(e => e.Description).HasMaxLength(255).HasColumnName("description").UseCollation("vi_ci_ai");
+            entity.Property(e => e.Description).HasMaxLength(255).HasColumnName("description");
             entity.ConfigureAudit();
         });
 
@@ -684,9 +684,9 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
             entity.Property(e => e.Status).HasMaxLength(20).HasColumnName("status").HasDefaultValue("draft");
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(10,0)").HasColumnName("total_amount");
             entity.Property(e => e.VatAmount).HasColumnType("decimal(10,0)").HasColumnName("vat_amount");
-            entity.Property(e => e.BuyerName).HasMaxLength(255).HasColumnName("buyer_name").UseCollation("vi_ci_ai");
+            entity.Property(e => e.BuyerName).HasMaxLength(255).HasColumnName("buyer_name");
             entity.Property(e => e.BuyerTaxCode).HasMaxLength(20).HasColumnName("buyer_tax_code");
-            entity.Property(e => e.BuyerAddress).HasMaxLength(500).HasColumnName("buyer_address").UseCollation("vi_ci_ai");
+            entity.Property(e => e.BuyerAddress).HasMaxLength(500).HasColumnName("buyer_address");
             entity.Property(e => e.PdfUrl).HasMaxLength(500).HasColumnName("pdf_url");
             entity.Property(e => e.XmlUrl).HasMaxLength(500).HasColumnName("xml_url");
             entity.Property(e => e.ProviderResponse).HasColumnName("provider_response");
@@ -735,3 +735,4 @@ public partial class StoreDbContext : IdentityDbContext<ApplicationUser, Applica
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+

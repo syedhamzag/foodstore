@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using FoodstoreApi.Usecase.Interfaces;
 using FoodstoreApi.Web.Authorization;
 using FoodstoreApi.Usecase.DTOs.Role;
@@ -67,7 +67,7 @@ public class RolesController : ControllerBase
         catch (InvalidOperationException) { throw; }
         catch (Exception)
         {
-            return ApiResult.BadRequest("Không thể xóa vai trò này vì đang có nhân viên nắm giữ.");
+            return ApiResult.BadRequest("This role cannot be deleted because it is currently held by an employee.");
         }
     }
 

@@ -23,14 +23,14 @@
 
 	// Payment options
 	const paymentOptions = [
-		{ id: 'cash', name: 'Tiền mặt', icon: '💵', description: 'Thanh toán tiền mặt' },
-		{ id: 'banking', name: 'Chuyển khoản', icon: '🏦', description: 'Chuyển khoản ngân hàng' },
-		{ id: 'qr', name: 'QR Code', icon: '📱', description: 'Quét mã QR để thanh toán' }
+		{ id: 'cash', name: 'Cash', icon: '💵', description: 'Cash payment' },
+		{ id: 'banking', name: 'Card', icon: '🏦', description: 'Bank transfer' },
+		{ id: 'qr', name: 'QR Code', icon: '📱', description: 'Scan the QR code to pay.' }
 	];
 
 	async function handleCheckout() {
 		if ($cart.items.length === 0) {
-			toastMessage = 'Giỏ hàng trống!';
+			toastMessage = 'Your cart is empty.!';
 			toastType = 'error';
 			showToast = true;
 			return;
@@ -61,7 +61,7 @@
 			// Call REAL backend API to create order
 			const createdOrder = await posAPI.createOrder(orderData);
 
-			toastMessage = `Đơn hàng ${createdOrder.orderCode} đã được tạo thành công!`;
+			toastMessage = `Order ${createdOrder.orderCode} has been successfully created.!`;
 			toastType = 'success';
 			showToast = true;
 
@@ -71,8 +71,8 @@
 			await goto('/pos');
 		} catch (error) {
 			console.error('Failed to create order:', error);
-			const message = error instanceof Error ? error.message : 'Không thể kết nối server';
-			toastMessage = 'Lỗi tạo đơn hàng: ' + message;
+			const message = error instanceof Error ? error.message : 'Unable to connect to the server.';
+			toastMessage = 'Order creation error: ' + message;
 			toastType = 'error';
 			showToast = true;
 		} finally {
@@ -86,7 +86,7 @@
 </script>
 
 <svelte:head>
-	<title>Thanh toán - Foodstore POS</title>
+	<title>EGH POS</title>
 </svelte:head>
 
 <div class="min-h-screen bg-gray-50">
@@ -97,13 +97,13 @@
 				<button
 					onclick={goBack}
 					class="rounded-lg p-2 transition-colors hover:bg-gray-100"
-					aria-label="Quay lại"
+					aria-label="Come back"
 				>
 					<Icon name="tabler:chevron-left" class="h-6 w-6" />
 				</button>
 				<div>
-					<h1 class="text-2xl font-bold text-gray-900">Thanh toán</h1>
-					<p class="text-sm text-gray-500">Hoàn tất đơn hàng</p>
+					<h1 class="text-2xl font-bold text-gray-900">Pay</h1>
+					<p class="text-sm text-gray-500">Complete the order</p>
 				</div>
 			</div>
 		</div>
@@ -119,38 +119,38 @@
 					<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 						<div>
 							<label for="customerName" class="mb-2 block text-sm font-medium text-gray-700"
-								>Tên khách hàng</label
+								>Customer Name</label
 							>
 							<input
 								id="customerName"
 								type="text"
 								bind:value={customerName}
-								placeholder="Nhập tên (tùy chọn)"
+								placeholder="Enter name (optional)"
 								class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-indigo-500"
 							/>
 						</div>
 						<div>
 							<label for="customerPhone" class="mb-2 block text-sm font-medium text-gray-700"
-								>Số điện thoại</label
+								>Phone number</label
 							>
 							<input
 								id="customerPhone"
 								type="tel"
 								bind:value={customerPhone}
-								placeholder="Nhập SĐT (tùy chọn)"
+								placeholder="Enter phone number (optional)"
 								class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-indigo-500"
 							/>
 						</div>
 					</div>
 					<div class="mt-4">
 						<label for="orderNote" class="mb-2 block text-sm font-medium text-gray-700"
-							>Ghi chú</label
+							>Note</label
 						>
 						<textarea
 							id="orderNote"
 							bind:value={note}
 							rows="2"
-							placeholder="Ghi chú đặc biệt..."
+							placeholder="Special Note..."
 							class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-indigo-500"
 						></textarea>
 					</div>
@@ -179,7 +179,7 @@
 						<div class="space-y-4 duration-300 animate-in slide-in-from-top-2">
 							<div>
 								<label for="cashReceived" class="mb-2 block text-sm font-medium text-gray-700"
-									>Khách đưa</label
+									>Guest's contribution</label
 								>
 								<div class="relative">
 									<input
@@ -208,7 +208,7 @@
 									onclick={() => (cashReceived = $cartTotals.total)}
 									class="rounded-lg border border-green-200 bg-green-50 px-3 py-2 text-sm font-bold text-green-700 shadow-sm transition-all hover:bg-green-100 active:scale-95"
 								>
-									Đủ tiền
+									Enough money
 								</button>
 							</div>
 
@@ -227,10 +227,10 @@
 								{paymentMethod === 'banking' ? '🏦' : '📱'}
 							</div>
 							<p class="font-bold text-gray-900">
-								Hệ thống sẽ tạo mã {paymentMethod.toUpperCase()}
+								The system will generate a code. {paymentMethod.toUpperCase()}
 							</p>
 							<p class="text-sm text-gray-500">
-								Vui lòng hướng dẫn khách hàng quét mã hoặc chuyển khoản
+								Please instruct the customer to scan the code or make a bank transfer.
 							</p>
 						</div>
 					{/if}
@@ -239,7 +239,7 @@
 				<!-- Order Items -->
 				<Card>
 					<h2 class="mb-4 text-lg font-semibold text-gray-900">
-						Danh sách món ({$cart.items.length})
+						Menu ({$cart.items.length})
 					</h2>
 					<div class="space-y-3">
 						{#each $cart.items as item, index (index)}
@@ -257,7 +257,7 @@
 										</div>
 									{/if}
 									{#if item.note}
-										<div class="ml-8 text-xs text-gray-500 italic">Ghi chú: {item.note}</div>
+										<div class="ml-8 text-xs text-gray-500 italic">Note: {item.note}</div>
 									{/if}
 								</div>
 								<div class="font-semibold text-gray-900">{formatCurrency(item.subtotal)}</div>
@@ -271,28 +271,28 @@
 			<div class="lg:col-span-1">
 				<div class="sticky top-6">
 					<Card>
-						<h2 class="mb-4 text-lg font-semibold text-gray-900">Tổng kết</h2>
+						<h2 class="mb-4 text-lg font-semibold text-gray-900">Summary</h2>
 
 						{#if $cart.selectedSource}
 							<div class="mb-4 rounded-lg bg-indigo-50 p-3">
-								<div class="text-sm text-indigo-700">Nguồn đơn:</div>
+								<div class="text-sm text-indigo-700">Single source:</div>
 								<div class="font-semibold text-indigo-900">{$cart.selectedSource.name}</div>
 							</div>
 						{/if}
 
 						<div class="mb-6 space-y-3">
 							<div class="flex justify-between text-sm">
-								<span class="text-gray-600">Tạm tính</span>
+								<span class="text-gray-600">Provisional calculation</span>
 								<span class="font-semibold">{formatCurrency($cartTotals.subtotal)}</span>
 							</div>
 							{#if $cartTotals.discountAmount > 0}
 								<div class="flex justify-between text-sm text-green-600">
-									<span>Giảm giá</span>
+									<span>Discount</span>
 									<span class="font-semibold">-{formatCurrency($cartTotals.discountAmount)}</span>
 								</div>
 							{/if}
 							<div class="flex justify-between border-t pt-3">
-								<span class="text-lg font-semibold text-gray-900">Tổng cộng</span>
+								<span class="text-lg font-semibold text-gray-900">Total</span>
 								<span class="text-2xl font-bold text-indigo-600"
 									>{formatCurrency($cartTotals.total)}</span
 								>
@@ -305,11 +305,11 @@
 							onclick={handleCheckout}
 							disabled={loading || $cart.items.length === 0}
 						>
-							{loading ? 'Đang xử lý...' : 'Xác nhận thanh toán'}
+							{loading ? 'Processing...' : 'Confirm payment'}
 						</Button>
 
 						<Button variant="secondary" fullWidth={true} onclick={goBack} disabled={loading}>
-							Quay lại
+							Come back
 						</Button>
 					</Card>
 				</div>

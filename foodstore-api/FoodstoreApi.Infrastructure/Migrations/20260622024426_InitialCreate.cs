@@ -17,7 +17,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, collation: "vi_ci_ai"),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     price = table.Column<decimal>(type: "numeric(10,0)", nullable: false),
                     is_active = table.Column<bool>(type: "boolean", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -87,9 +87,9 @@ namespace FoodstoreApi.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, collation: "vi_ci_ai"),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     slug = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true, collation: "vi_ci_ai"),
+                    description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     parent_id = table.Column<Guid>(type: "uuid", nullable: true),
                     sort_order = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -129,8 +129,8 @@ namespace FoodstoreApi.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, collation: "vi_ci_ai"),
-                    description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true, collation: "vi_ci_ai"),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     image_url = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     is_active = table.Column<bool>(type: "boolean", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -148,9 +148,9 @@ namespace FoodstoreApi.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, collation: "vi_ci_ai"),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     combo_price = table.Column<decimal>(type: "numeric(10,0)", nullable: false),
-                    description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true, collation: "vi_ci_ai"),
+                    description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     image_url = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     is_active = table.Column<bool>(type: "boolean", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -169,7 +169,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     code = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, collation: "vi_ci_ai"),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     type = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     value = table.Column<decimal>(type: "numeric(10,2)", nullable: false),
                     max_discount_amount = table.Column<decimal>(type: "numeric(10,0)", nullable: true),
@@ -194,11 +194,11 @@ namespace FoodstoreApi.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, collation: "vi_ci_ai"),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     provider_type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     is_active = table.Column<bool>(type: "boolean", nullable: false),
                     config_json = table.Column<string>(type: "text", nullable: false),
-                    description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true, collation: "vi_ci_ai"),
+                    description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     created_by = table.Column<Guid>(type: "uuid", nullable: true),
@@ -216,7 +216,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     bank_id = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     bank_account = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    bank_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, collation: "vi_ci_ai"),
+                    bank_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     bank_account_name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     template = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false, defaultValue: "compact2"),
                     is_active = table.Column<bool>(type: "boolean", nullable: false),
@@ -236,7 +236,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false, collation: "vi_ci_ai"),
+                    name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     is_active = table.Column<bool>(type: "boolean", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -253,9 +253,9 @@ namespace FoodstoreApi.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, collation: "vi_ci_ai"),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     slug = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true, collation: "vi_ci_ai"),
+                    description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     color = table.Column<string>(type: "character varying(7)", maxLength: 7, nullable: false, defaultValue: "#f59e0b"),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -466,8 +466,8 @@ namespace FoodstoreApi.Infrastructure.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     category_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, collation: "vi_ci_ai"),
-                    description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true, collation: "vi_ci_ai"),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     price = table.Column<decimal>(type: "numeric(10,0)", nullable: false),
                     image_url = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     is_active = table.Column<bool>(type: "boolean", nullable: true),
@@ -516,10 +516,10 @@ namespace FoodstoreApi.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    title = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false, collation: "vi_ci_ai"),
+                    title = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     slug = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    excerpt = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true, collation: "vi_ci_ai"),
-                    content = table.Column<string>(type: "text", nullable: true, collation: "vi_ci_ai"),
+                    excerpt = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
+                    content = table.Column<string>(type: "text", nullable: true),
                     thumbnail_url = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     status = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true, defaultValue: "draft"),
                     author_id = table.Column<Guid>(type: "uuid", nullable: true),
@@ -616,7 +616,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                     qr_payment_url = table.Column<string>(type: "text", nullable: true),
                     paid_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     status = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
-                    note = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true, collation: "vi_ci_ai"),
+                    note = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     printed_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     updated_by = table.Column<Guid>(type: "uuid", nullable: true),
                     created_by = table.Column<Guid>(type: "uuid", nullable: true),
@@ -839,9 +839,9 @@ namespace FoodstoreApi.Infrastructure.Migrations
                     status = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false, defaultValue: "draft"),
                     total_amount = table.Column<decimal>(type: "numeric(10,0)", nullable: false),
                     vat_amount = table.Column<decimal>(type: "numeric(10,0)", nullable: false),
-                    buyer_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true, collation: "vi_ci_ai"),
+                    buyer_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     buyer_tax_code = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
-                    buyer_address = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true, collation: "vi_ci_ai"),
+                    buyer_address = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     pdf_url = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     xml_url = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     provider_response = table.Column<string>(type: "text", nullable: true),
@@ -878,11 +878,11 @@ namespace FoodstoreApi.Infrastructure.Migrations
                     order_id = table.Column<Guid>(type: "uuid", nullable: false),
                     menu_item_id = table.Column<Guid>(type: "uuid", nullable: true),
                     combo_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    menu_item_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false, collation: "vi_ci_ai"),
+                    menu_item_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     unit_price = table.Column<decimal>(type: "numeric(10,0)", nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false),
                     total_price = table.Column<decimal>(type: "numeric(10,0)", nullable: false),
-                    note = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true, collation: "vi_ci_ai"),
+                    note = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     created_by = table.Column<Guid>(type: "uuid", nullable: true),
@@ -921,7 +921,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                     to_status = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     changed_by = table.Column<Guid>(type: "uuid", nullable: true),
                     changed_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    note = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true, collation: "vi_ci_ai")
+                    note = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -973,7 +973,7 @@ namespace FoodstoreApi.Infrastructure.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     order_item_id = table.Column<Guid>(type: "uuid", nullable: false),
                     addon_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    addon_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, collation: "vi_ci_ai"),
+                    addon_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: true),
                     unit_price = table.Column<decimal>(type: "numeric(10,0)", nullable: false),
                     total_price = table.Column<decimal>(type: "numeric(10,0)", nullable: false),
@@ -1378,3 +1378,4 @@ namespace FoodstoreApi.Infrastructure.Migrations
         }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using FoodstoreApi.Usecase.Interfaces;
 using FoodstoreApi.Web.Authorization;
 using FoodstoreApi.Usecase.DTOs.Employee;
@@ -73,7 +73,7 @@ public class EmployeesController : ControllerBase
         }
         catch (Exception)
         {
-            return ApiResult.BadRequest("Không thể xóa nhân viên này vì đang liên kết với đơn hàng hoặc dữ liệu khác.");
+            return ApiResult.BadRequest("This employee cannot be deleted because they are linked to an order or other data.");
         }
     }
 }

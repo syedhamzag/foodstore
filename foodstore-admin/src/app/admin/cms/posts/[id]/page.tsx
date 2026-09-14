@@ -73,7 +73,7 @@ export default function PostEditorPage() {
           setOgImageUrl(p.ogImageUrl ?? "")
           setSelectedCategoryIds(p.categories?.map(c => c.id) ?? [])
           setSelectedTagIds(p.tags?.map(t => t.id) ?? [])
-        } catch { toast.error("Không thể tải bài viết"); router.push("/admin/cms/posts") }
+        } catch { toast.error("Unable to load the article."); router.push("/admin/cms/posts") }
         finally { setLoading(false) }
       })()
     }
@@ -96,17 +96,17 @@ export default function PostEditorPage() {
   })
 
   const handleSave = async (overrideStatus?: string) => {
-    if (!title.trim()) { toast.error("Vui lòng nhập tiêu đề"); return }
+    if (!title.trim()) { toast.error("Please enter a title."); return }
     setSaving(true)
     const finalStatus = overrideStatus ?? status
     try {
       if (isNew) {
         const created = await blogService.create({ ...buildDto(), status: finalStatus } as CreateBlogPostDto)
-        toast.success("Tạo bài viết thành công")
+        toast.success("Post created successfully.")
         router.push(`/admin/cms/posts/${created.id}`)
       } else {
         await blogService.update(id, { ...buildDto(), status: finalStatus } as UpdateBlogPostDto)
-        toast.success("Đã lưu bài viết")
+        toast.success("Article saved.")
       }
     } catch (e) { toast.error((e as Error).message) }
     finally { setSaving(false) }
@@ -118,20 +118,20 @@ export default function PostEditorPage() {
     try {
       await blogService.changeStatus(id, "published")
       setStatus("published")
-      toast.success("Đã xuất bản bài viết")
+      toast.success("Article published")
     } catch (e) { toast.error((e as Error).message) }
     finally { setSaving(false) }
   }
 
   const handleSchedule = async () => {
-    const date = window.prompt("Nhập ngày giờ xuất bản (YYYY-MM-DD HH:MM):")
+    const date = window.prompt("Enter publication date and time (YYYY-MM-DD HH:MM):")
     if (!date) return
     if (isNew) { setStatus("scheduled"); await handleSave("scheduled"); return }
     setSaving(true)
     try {
       await blogService.schedule(id, new Date(date).toISOString())
       setStatus("scheduled")
-      toast.success("Đã lên lịch xuất bản")
+      toast.success("Scheduled for publication")
     } catch (e) { toast.error((e as Error).message) }
     finally { setSaving(false) }
   }
@@ -151,60 +151,60 @@ export default function PostEditorPage() {
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" onClick={() => router.push("/admin/cms/posts")}><ArrowLeft className="size-5" /></Button>
           <div>
-            <h1 className="text-lg font-semibold">{isNew ? "Thêm bài viết mới" : "Sửa bài viết"}</h1>
-            {!isNew && post && <p className="text-xs text-muted-foreground">Slug: /blog/{post.slug} • Lượt xem: {post.viewCount}</p>}
+            <h1 className="text-lg font-semibold">{isNew ? "Add new post" : "Edit post"}</h1>
+            {!isNew && post && <p className="text-xs text-muted-foreground">Slug: /blog/{post.slug} • View: {post.viewCount}</p>}
           </div>
         </div>
         <div className="flex items-center gap-2">
           <select value={status} onChange={(e) => setStatus(e.target.value)} className="flex h-9 w-36 rounded-md border border-input bg-background px-3 py-1 text-sm">
-            <option value="draft">Bản nháp</option>
-            <option value="reviewed">Đã duyệt</option>
-            <option value="published">Xuất bản</option>
-            <option value="scheduled">Lên lịch</option>
+            <option value="draft">Draft</option>
+            <option value="reviewed">Reviewed</option>
+            <option value="published">Published</option>
+            <option value="scheduled">Scheduled</option>
           </select>
           <Button variant="outline" onClick={() => handleSave()} disabled={saving}>
-            <Save className="size-4 mr-1" />{saving ? "Đang lưu..." : "Lưu"}
+            <Save className="size-4 mr-1" />{saving ? "Saving..." : "Saving"}
           </Button>
           {status !== "published" && (
             <Button onClick={handlePublish} disabled={saving}>
-              <Eye className="size-4 mr-1" />Xuất bản
+              <Eye className="size-4 mr-1" />Publish
             </Button>
           )}
           <Button variant="outline" onClick={handleSchedule} disabled={saving}>
-            <Clock className="size-4 mr-1" />Lên lịch
+            <Clock className="size-4 mr-1" />Schedule
           </Button>
         </div>
       </header>
 
       <Tabs defaultValue="content" className="w-full">
         <TabsList>
-          <TabsTrigger value="content">Nội dung</TabsTrigger>
+          <TabsTrigger value="content">Content</TabsTrigger>
           <TabsTrigger value="seo">SEO</TabsTrigger>
-          <TabsTrigger value="settings">Cài đặt</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
 
         <TabsContent value="content" className="space-y-4 mt-4">
           <div className="grid gap-4">
             <div>
-              <Label>Tiêu đề *</Label>
-              <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Tiêu đề bài viết" className="text-lg font-semibold" />
+              <Label>Title *</Label>
+              <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Article Title" className="text-lg font-semibold" />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label>Đường dẫn (Slug)</Label>
-                <Input value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="tu-dong-tao-tu-tieu-de" />
+                <Label>Link (Slug)</Label>
+                <Input value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="Auto-generate from title" />
               </div>
               <div>
-                <Label>Ảnh đại diện (URL)</Label>
+                <Label>Avatar (URL)</Label>
                 <Input value={thumbnailUrl} onChange={(e) => setThumbnailUrl(e.target.value)} placeholder="https://..." />
               </div>
             </div>
             <div>
-              <Label>Mô tả ngắn</Label>
-              <Textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} rows={2} placeholder="Mô tả ngắn xuất hiện trong danh sách bài viết" />
+              <Label>Short description</Label>
+              <Textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} rows={2} placeholder="Short description appearing in the article list" />
             </div>
             <div>
-              <Label>Nội dung</Label>
+              <Label>Content</Label>
               <Tiptap content={content} onChange={setContent} />
             </div>
           </div>
@@ -214,21 +214,21 @@ export default function PostEditorPage() {
           <div className="grid gap-4 max-w-2xl">
             <div className="grid gap-2">
               <Label>Meta Title</Label>
-              <Input value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} placeholder="Tối ưu: 50-60 ký tự" />
+              <Input value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} placeholder="Optimal: 50–60 characters" />
               <p className="text-xs text-muted-foreground">{metaTitle.length}/60</p>
             </div>
             <div className="grid gap-2">
               <Label>Meta Description</Label>
-              <Textarea value={metaDescription} onChange={(e) => setMetaDescription(e.target.value)} rows={2} placeholder="Tối ưu: 150-160 ký tự" />
+              <Textarea value={metaDescription} onChange={(e) => setMetaDescription(e.target.value)} rows={2} placeholder="Optimal: 150–160 characters" />
               <p className="text-xs text-muted-foreground">{metaDescription.length}/160</p>
             </div>
             <div className="grid gap-2">
               <Label>Focus Keyword</Label>
-              <Input value={focusKeyword} onChange={(e) => setFocusKeyword(e.target.value)} placeholder="Từ khóa chính của bài viết" />
+              <Input value={focusKeyword} onChange={(e) => setFocusKeyword(e.target.value)} placeholder="Main keyword of the article" />
             </div>
             <div className="grid gap-2">
               <Label>OG Image URL</Label>
-              <Input value={ogImageUrl} onChange={(e) => setOgImageUrl(e.target.value)} placeholder="Ảnh chia sẻ mạng xã hội" />
+              <Input value={ogImageUrl} onChange={(e) => setOgImageUrl(e.target.value)} placeholder="Photo shared on social networks" />
             </div>
           </div>
         </TabsContent>
@@ -257,11 +257,11 @@ export default function PostEditorPage() {
             </div>
             <Separator />
             <div className="flex items-center justify-between">
-              <div><Label>Bài viết nổi bật</Label><p className="text-xs text-muted-foreground">Hiển thị ở mục nổi bật</p></div>
+              <div><Label>Featured Articles</Label><p className="text-xs text-muted-foreground">Display in the featured section</p></div>
               <Switch checked={isFeatured} onCheckedChange={setIsFeatured} />
             </div>
             <div className="flex items-center justify-between">
-              <div><Label>Cho phép bình luận</Label></div>
+              <div><Label>Allow comments</Label></div>
               <Switch checked={allowComments} onCheckedChange={setAllowComments} />
             </div>
           </div>

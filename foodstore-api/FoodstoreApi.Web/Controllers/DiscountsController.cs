@@ -1,4 +1,4 @@
-﻿using FoodstoreApi.Usecase.Interfaces;
+using FoodstoreApi.Usecase.Interfaces;
 using FoodstoreApi.Web.Authorization;
 using FoodstoreApi.Usecase.DTOs.Discount;
 using Microsoft.AspNetCore.Mvc;
@@ -72,7 +72,7 @@ public class DiscountsController : ControllerBase
         }
         catch (Exception)
         {
-            return ApiResult.BadRequest("Không thể xóa mã giảm giá này vì đã được sử dụng trong đơn hàng.");
+            return ApiResult.BadRequest("This discount code cannot be deleted because it has already been used in an order.");
         }
     }
 }

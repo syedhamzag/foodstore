@@ -41,7 +41,7 @@
 	}
 </script>
 
-<svelte:head><title>POS - Foodstore</title></svelte:head>
+<svelte:head><title>POS - EGH</title></svelte:head>
 
 <div class="flex h-screen overflow-hidden bg-gray-100">
 	<!-- Left Sidebar: Categories & Menu -->
@@ -95,7 +95,7 @@
 									class="flex items-center gap-2 rounded-md px-2 py-2 text-sm font-medium text-heading hover:bg-neutral-tertiary-medium hover:text-heading"
 								>
 									<Icon name="tabler:news" class="h-4 w-4" />
-									POS (Thu ngân)
+									POS
 								</a>
 							</li>
 							<li>
@@ -104,7 +104,7 @@
 									class="flex items-center gap-2 rounded-md px-2 py-2 text-sm font-medium text-heading hover:bg-neutral-tertiary-medium hover:text-heading"
 								>
 									<Icon name="tabler:clock" class="h-4 w-4" />
-									Kitchen (Bếp)
+									Kitchen
 								</a>
 							</li>
 						</ul>
@@ -118,7 +118,7 @@
 							class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm font-medium text-fg-danger hover:bg-danger-soft"
 						>
 							<Icon name="tabler:door-open" class="h-4 w-4" />
-							Đăng xuất
+							Log out
 						</button>
 					</div>
 				</div>
@@ -153,17 +153,17 @@
 					class="flex items-center gap-2 rounded-base border border-default-medium bg-neutral-secondary-medium px-4 py-2 text-sm font-medium text-heading shadow-xs hover:bg-neutral-tertiary-medium"
 				>
 					<Icon name="tabler:file-text" class="h-5 w-5" />
-					<span class="hidden lg:inline">Hóa đơn</span>
+					<span class="hidden lg:inline">Bill</span>
 				</button>
 
 				<!-- Logout Button -->
 				<button
 					onclick={() => posStore.handleLogout()}
 					class="flex items-center gap-2 rounded-base border border-danger-subtle bg-neutral-secondary-medium px-4 py-2 text-sm font-medium text-fg-danger shadow-xs hover:bg-danger-soft"
-					title="Đăng xuất"
+					title="Log out"
 				>
 					<Icon name="tabler:logout" class="h-5 w-5" />
-					<span class="hidden lg:inline">Đăng xuất</span>
+					<span class="hidden lg:inline">Log out</span>
 				</button>
 			</div>
 		</div>
@@ -177,7 +177,7 @@
 					? 'bg-indigo-600 text-white'
 					: 'bg-gray-100 text-gray-700 hover:bg-gray-200'}"
 			>
-				Tất cả
+				All
 			</button>
 			{#each $categories as category (category.id)}
 				<button
@@ -237,7 +237,7 @@
 									<div
 										class="rounded bg-indigo-50 px-1 py-0.5 text-[10px] font-bold text-indigo-600 opacity-0 transition-opacity group-hover:opacity-100"
 									>
-										CHỌN
+										SELECT
 									</div>
 								</div>
 							</div>
@@ -250,7 +250,7 @@
 					<div class="mt-6">
 						<h3 class="mb-3 flex items-center gap-2 text-lg font-bold text-gray-800">
 							<span class="text-2xl">🎁</span>
-							Combo Khuyến Mãi
+							Promotional Combo
 						</h3>
 						<div
 							class="relative z-0 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
@@ -301,7 +301,7 @@
 			<button
 				onclick={() => (posStore.isCartOpen = true)}
 				class="animate-bounce-subtle relative flex items-center gap-2 rounded-full bg-indigo-600 p-4 text-white shadow-lg"
-				aria-label="Mở giỏ hàng"
+				aria-label="Open cart"
 			>
 				<Icon name="tabler:shopping-cart" class="h-6 w-6" />
 				<span class="font-bold">{$cart.items.reduce((sum, item) => sum + item.quantity, 0)}</span>
@@ -319,7 +319,7 @@
 			<div class="flex items-center justify-between">
 				<h2 class="flex items-center gap-2 text-lg font-bold text-gray-800">
 					<Icon name="tabler:shopping-cart" class="h-5 w-5" />
-					Giỏ hàng ({$cart.items.reduce((sum, item) => sum + item.quantity, 0)})
+					Shopping cart ({$cart.items.reduce((sum, item) => sum + item.quantity, 0)})
 				</h2>
 				<div class="flex items-center gap-3">
 					<button
@@ -327,13 +327,13 @@
 						class="text-sm font-medium text-red-500 hover:text-red-700"
 						disabled={$cart.items.length === 0}
 					>
-						Xóa
+						Delete
 					</button>
 					<!-- Close Button (Mobile Only) -->
 					<button
 						onclick={() => (posStore.isCartOpen = false)}
 						class="rounded-full bg-gray-100 p-1 text-gray-500 hover:text-gray-700 md:hidden"
-						aria-label="Đóng giỏ hàng"
+						aria-label="Close cart"
 					>
 						<Icon name="tabler:x" class="h-5 w-5" />
 					</button>
@@ -344,7 +344,7 @@
 				<div
 					class="flex items-center justify-between border-b border-amber-200 bg-amber-100 px-3 py-2 text-sm font-bold text-amber-800"
 				>
-					<span>Đang sửa: #{posStore.editingOrder.code}</span>
+					<span>Under revision: #{posStore.editingOrder.code}</span>
 					<button
 						onclick={() => posStore.clearCartAndEditState()}
 						class="text-xs text-amber-900 underline">Hủy sửa</button
@@ -365,12 +365,12 @@
 					<div class="text-left leading-tight">
 						<div class="text-xs opacity-75">Nguồn đơn</div>
 						<div class="text-sm font-bold">
-							{$cart.selectedSource ? $cart.selectedSource.name : 'Chưa chọn'}
+							{$cart.selectedSource ? $cart.selectedSource.name : 'Not yet selected'}
 						</div>
 					</div>
 				</div>
 				<span class="rounded border border-black/5 bg-white/50 px-2 py-1 text-xs font-medium"
-					>Đổi</span
+					>Change</span
 				>
 			</button>
 
@@ -391,7 +391,7 @@
 						</div>
 						{#if posStore.selectedCustomer}
 							<div class="text-[10px] font-bold text-green-600">
-								Điểm: {posStore.selectedCustomer.points}
+								Point: {posStore.selectedCustomer.points}
 							</div>
 						{/if}
 					</div>
@@ -411,7 +411,7 @@
 					</div>
 				{:else}
 					<span class="rounded border border-black/5 bg-white/50 px-2 py-1 text-xs font-medium"
-						>Chọn</span
+						>Select</span
 					>
 				{/if}
 			</button>
@@ -420,7 +420,7 @@
 		<div class="min-h-0 flex-1 space-y-3 overflow-y-auto p-3 md:p-4">
 			{#if $cart.items.length === 0}
 				<div class="py-12 text-center text-gray-500">
-					<p>Chưa có món nào trong giỏ</p>
+					<p>There are no items in the cart yet.</p>
 				</div>
 			{:else}
 				{#each $cart.items as item, index (index)}
@@ -441,7 +441,7 @@
 								<button
 									onclick={() => cartActions.removeItem(index)}
 									class="flex-shrink-0 touch-manipulation rounded-lg p-1.5 text-gray-400 transition-all hover:bg-red-50 hover:text-red-600 active:scale-90"
-									aria-label="Xóa món"
+									aria-label="Delete item"
 								>
 									<Icon name="tabler:x" class="h-4 w-4" />
 								</button>
@@ -470,7 +470,7 @@
 										}}
 										class="flex h-7 w-7 items-center justify-center rounded-lg bg-gray-100 text-gray-700 transition-all hover:bg-gray-200 active:scale-90"
 										disabled={item.quantity <= 1}
-										aria-label="Giảm số lượng"
+										aria-label="Reduce the quantity"
 									>
 										<Icon name="tabler:minus" class="h-4 w-4" />
 									</button>
@@ -480,7 +480,7 @@
 									<button
 										onclick={() => cartActions.updateQuantity(index, item.quantity + 1)}
 										class="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-600 text-white transition-all hover:bg-indigo-700 active:scale-90"
-										aria-label="Tăng số lượng"
+										aria-label="Increase the quantity"
 									>
 										<Icon name="tabler:plus" class="h-4 w-4" />
 									</button>
@@ -532,18 +532,18 @@
 			</div>
 			{#if $cartTotals.discountAmount > 0}
 				<div class="flex justify-between text-sm text-green-600">
-					<span>Giảm giá:</span>
+					<span>Discount:</span>
 					<span>-{formatCurrency($cartTotals.discountAmount)}</span>
 				</div>
 			{/if}
 			{#if $cartTotals.vatAmount > 0}
 				<div class="flex justify-between text-sm text-gray-600">
-					<span>VAT (10%):</span>
+					<span>VAT (15%):</span>
 					<span>+{formatCurrency($cartTotals.vatAmount)}</span>
 				</div>
 			{/if}
 			<div class="flex justify-between text-lg font-bold text-indigo-600 md:text-xl">
-				<span>Tổng cộng:</span>
+				<span>Total:</span>
 				<span>{formatCurrency($cartTotals.total)}</span>
 			</div>
 			<Button
@@ -552,7 +552,7 @@
 				onclick={() => posStore.handlePlaceOrder()}
 				disabled={$cart.items.length === 0}
 			>
-				Thanh toán ngay
+				Pay now
 			</Button>
 		</div>
 	</div>
@@ -561,7 +561,7 @@
 <!-- Source Selection Modal -->
 <Modal
 	bind:open={posStore.showSourceModal}
-	title="Chọn nguồn đơn"
+	title="Select single source"
 	onClose={() => (posStore.showSourceModal = false)}
 >
 	<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4">
@@ -589,7 +589,7 @@
 <!-- Addon Modal -->
 <Modal
 	bind:open={posStore.showAddonModal}
-	title={posStore.selectedMenuItem?.name || 'Thêm món'}
+	title={posStore.selectedMenuItem?.name || 'Add item'}
 	onClose={() => (posStore.showAddonModal = false)}
 >
 	{#if posStore.selectedMenuItem}
@@ -642,7 +642,7 @@
 					bind:value={posStore.itemNote}
 					rows="2"
 					class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-indigo-500"
-					placeholder="Ví dụ: Ít đá, nhiều sữa..."></textarea>
+					placeholder="Example: Light ice, extra milk...."></textarea>
 			</div>
 
 			<!-- Quantity & Total -->
@@ -651,7 +651,7 @@
 					<button
 						onclick={() => (posStore.itemQuantity = Math.max(1, posStore.itemQuantity - 1))}
 						class="h-10 w-10 rounded-lg bg-gray-100 font-semibold hover:bg-gray-200"
-						aria-label="Giảm số lượng"
+						aria-label="Reduce the quantity"
 					>
 						-
 					</button>
@@ -665,7 +665,7 @@
 					<button
 						onclick={() => posStore.itemQuantity++}
 						class="h-10 w-10 rounded-lg bg-gray-100 font-semibold hover:bg-gray-200"
-						aria-label="Tăng số lượng"
+						aria-label="Increase the quantity"
 					>
 						+
 					</button>
@@ -680,7 +680,7 @@
 			</div>
 
 			<Button variant="primary" fullWidth={true} onclick={() => posStore.addToCart()}>
-				Thêm vào giỏ - {formatCurrency(
+				Add to cart - {formatCurrency(
 					(posStore.selectedMenuItem.price +
 						posStore.selectedAddons.reduce((sum, a) => sum + a.addon.price, 0)) *
 						posStore.itemQuantity
@@ -693,7 +693,7 @@
 <!-- Pending Orders Modal -->
 <Modal
 	bind:open={posStore.showOrdersModal}
-	title="Hóa đơn chờ thanh toán"
+	title="Invoice pending payment"
 	onClose={() => (posStore.showOrdersModal = false)}
 >
 	<div class="max-h-[60vh] space-y-4 overflow-y-auto pr-2">
@@ -732,19 +732,19 @@
 							onclick={() => posStore.cancelOrder(order.id)}
 							class="flex h-10 items-center justify-center rounded-lg border-2 border-red-50 bg-white text-xs font-bold text-red-500 transition-all hover:bg-red-50 active:scale-95"
 						>
-							HỦY ĐƠN
+							CANCEL ORDER
 						</button>
 						<button
 							onclick={() => posStore.adjustOrder(order)}
 							class="flex h-10 items-center justify-center rounded-lg border-2 border-amber-50 bg-white text-xs font-bold text-amber-600 transition-all hover:bg-amber-50 active:scale-95"
 						>
-							SỬA MÓN
+							Dish Modification
 						</button>
 						<button
 							onclick={() => posStore.openPaymentModal(order)}
 							class="flex h-10 items-center justify-center rounded-lg bg-indigo-600 text-xs font-bold text-white shadow-md shadow-indigo-100 transition-all hover:bg-indigo-700 active:scale-95"
 						>
-							THANH TOÁN
+							PAY
 						</button>
 					</div>
 				</div>
@@ -756,7 +756,7 @@
 <!-- Customer Modal -->
 <Modal
 	bind:open={posStore.showCustomerModal}
-	title="Khách hàng thành viên"
+	title="Member customers"
 	onClose={() => (posStore.showCustomerModal = false)}
 >
 	<div class="space-y-6">
@@ -765,12 +765,12 @@
 			<input
 				type="text"
 				bind:value={posStore.customerPhone}
-				placeholder="Nhập số điện thoại khách hàng..."
+				placeholder="Enter customer phone number..."
 				class="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-indigo-500"
 				onkeydown={(e) => e.key === 'Enter' && posStore.lookupCustomer(posStore.customerPhone)}
 			/>
 			<Button variant="primary" onclick={() => posStore.lookupCustomer(posStore.customerPhone)}>
-				Tìm kiếm
+				Search
 			</Button>
 		</div>
 
@@ -782,7 +782,7 @@
 					<div class="text-lg font-bold text-green-800">{posStore.selectedCustomer.fullName}</div>
 					<div class="text-green-600">{posStore.selectedCustomer.phone}</div>
 					<div class="mt-1 text-sm text-green-700">
-						Điểm tích lũy: <span class="font-bold">{posStore.selectedCustomer.points}</span>
+						Accumulated points: <span class="font-bold">{posStore.selectedCustomer.points}</span>
 					</div>
 				</div>
 				<div class="text-4xl text-green-500">✓</div>
@@ -793,7 +793,7 @@
 					onclick={() => (posStore.showCustomerModal = false)}
 					fullWidth={true}
 				>
-					Xác nhận sử dụng
+					Confirm usage
 				</Button>
 			</div>
 		{/if}
@@ -819,7 +819,7 @@
 		>
 			<div>
 				<label for="customer-fullname" class="mb-1 block text-sm font-medium text-gray-700"
-					>Tên khách hàng</label
+					>Customer Name</label
 				>
 				<input
 					id="customer-fullname"
@@ -827,12 +827,12 @@
 					type="text"
 					required
 					class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-indigo-500"
-					placeholder="VD: Nguyễn Văn A"
+					placeholder="E.g.: Rameez Raja"
 				/>
 			</div>
 			<div>
 				<label for="customer-phone" class="mb-1 block text-sm font-medium text-gray-700"
-					>Số điện thoại</label
+					>Phone number</label
 				>
 				<input
 					id="customer-phone"
@@ -841,19 +841,19 @@
 					required
 					bind:value={posStore.customerPhone}
 					class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-indigo-500"
-					placeholder="VD: 0912345678"
+					placeholder="E.g.: 0912345678"
 				/>
 			</div>
 			<div>
 				<label for="customer-email" class="mb-1 block text-sm font-medium text-gray-700"
-					>Email (Tùy chọn)</label
+					>Email</label
 				>
 				<input
 					id="customer-email"
 					name="tabler:mail"
 					type="email"
 					class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-indigo-500"
-					placeholder="VD: email@example.com"
+					placeholder="E.g.: email@example.com"
 				/>
 			</div>
 			<Button type="submit" variant="secondary" fullWidth={true}>Tạo khách hàng mới & Chọn</Button>

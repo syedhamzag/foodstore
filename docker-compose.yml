@@ -9,10 +9,10 @@ services:
       - "--api.dashboard=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:8080"
+      - "--entrypoints.web.address=:80"
       - "--entrypoints.traefik.address=:9090"
     ports:
-      - "80:8080"
+      - "80:80"
       - "9090:9090"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -76,7 +76,7 @@ services:
 
   api:
     build:
-      context: .
+      context: ./foodstore-api
       dockerfile: Dockerfile
     container_name: foodstore-api
     ports:
@@ -108,6 +108,61 @@ services:
         condition: service_healthy
       rustfs:
         condition: service_healthy
+    networks:
+      - app-network
+
+  store:
+    build:
+      context: ./foodstore-store
+      dockerfile: Dockerfile
+    container_name: store
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.store.rule=Host(`store.localhost`)"
+      - "traefik.http.services.store.loadbalancer.server.port=3000"
+    environment:
+      NODE_ENV: production
+      PUBLIC_API_URL: http://api.localhost/v2
+      PUBLIC_AUTH_STORAGE_PREFIX: foodstore_
+      PUBLIC_SIGNALR_HUB: /hubs/app
+      PUBLIC_SIGNALR_WS_ONLY: "true"
+      PUBLIC_VIETQR_API_URL: https://api.vietqr.io/v2/banks
+      PUBLIC_DEFAULT_QR_TEMPLATE: compact2
+      PUBLIC_SITE_DOMAIN: foodstore
+      PUBLIC_DEFAULT_CUSTOMER_PASSWORD: Customer@123
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+  admin:
+    build:
+      context: ./foodstore-admin
+      dockerfile: Dockerfile
+    container_name: admin
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.admin.rule=Host(`admin.localhost`)"
+      - "traefik.http.services.admin.loadbalancer.server.port=3000"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: http://api.localhost/v2
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+  landingpage:
+    build:
+      context: ./foodstore-landingpage
+      dockerfile: Dockerfile
+    container_name: landingpage
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.landingpage.rule=Host(`localhost`)"
+      - "traefik.http.services.landingpage.loadbalancer.server.port=3000"
+    environment:
+      NODE_ENV: production
     networks:
       - app-network
 

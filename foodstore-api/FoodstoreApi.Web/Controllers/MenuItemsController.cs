@@ -1,4 +1,4 @@
-﻿using FoodstoreApi.Usecase.Interfaces;
+using FoodstoreApi.Usecase.Interfaces;
 using FoodstoreApi.Web.Authorization;
 using FoodstoreApi.Usecase.DTOs.MenuItem;
 using Microsoft.AspNetCore.Mvc;
@@ -71,7 +71,7 @@ public class MenuItemsController : ControllerBase
         }
         catch (Exception)
         {
-            return ApiResult.BadRequest("Không thể xóa món này vì đã có trong đơn hàng hoặc combo.");
+            return ApiResult.BadRequest("This item cannot be deleted because it is already included in an order or combo.");
         }
     }
 
