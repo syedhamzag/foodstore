@@ -1,3 +1,5 @@
+import { API_URL } from "./config";
+
 type FetchOptions = RequestInit & {
   skipAuth?: boolean;
   token?: string;
@@ -20,7 +22,7 @@ export async function apiClient<T>(path: string, options: FetchOptions = {}): Pr
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`/api/proxy${path}`, {
+  const res = await fetch(`${API_URL}${path}`, {
     ...fetchOpts,
     headers,
   });

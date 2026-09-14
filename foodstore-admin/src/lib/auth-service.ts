@@ -30,7 +30,7 @@ export function getAuthToken(): string | null {
 
 export const authService = {
   async login(username: string, password: string): Promise<LoginPayload> {
-    const res = await apiClient<ApiResponse<LoginPayload>>("/auth/login", {
+    const res = await apiClient<ApiResponse<LoginPayload>>("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       skipAuth: true,
