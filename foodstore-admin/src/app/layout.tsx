@@ -11,8 +11,8 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Foodstore Admin",
-  description: "Trang quản trị Foodstore",
+  title: "EGH Admin",
+  description: "Eshu Grill House Restaurant for Meals",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
