@@ -145,6 +145,6 @@ export const API_ENDPOINTS = {
 		complete: (id: number) => `${API_BASE_URL}/api/kitchen/orders/${id}/complete`
 	},
 	blog: `${API_BASE_URL}/api/blog`,
-	customers: `${API_BASE_URL}/api/customers`,
+	customers: `${API_HOST_URL}/api/customers`,
 	media: `${API_BASE_URL}/api/media`
 };

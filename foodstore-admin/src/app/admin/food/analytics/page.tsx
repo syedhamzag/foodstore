@@ -172,9 +172,9 @@ export default function AnalyticsPage() {
                   <ResponsiveContainer width="100%" height={280}>
                     <LineChart data={forecast.forecasts}>
                       <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
-                      <XAxis dataKey="date" tick={{ fontSize: 11 }} tickFormatter={(v) => new Date(v).toLocaleDateString("vi-VN", { day: "numeric", month: "numeric" })} />
+                      <XAxis dataKey="date" tick={{ fontSize: 11 }} tickFormatter={(v) => new Date(v).toLocaleDateString("en-SA", { day: "numeric", month: "numeric" })} />
                       <YAxis tick={{ fontSize: 11 }} tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
-                      <Tooltip formatter={(v) => formatCurrency(Number(v))} labelFormatter={(l) => new Date(String(l)).toLocaleDateString("vi-VN")} />
+                      <Tooltip formatter={(v) => formatCurrency(Number(v))} labelFormatter={(l) => new Date(String(l)).toLocaleDateString("en-SA")} />
                       <Line type="monotone" dataKey="revenue" stroke="#6366f1" strokeWidth={2} dot={{ r: 3, fill: "#6366f1" }} />
                     </LineChart>
                   </ResponsiveContainer>

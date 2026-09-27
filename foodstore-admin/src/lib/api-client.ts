@@ -22,7 +22,7 @@ export async function apiClient<T>(path: string, options: FetchOptions = {}): Pr
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${API_URL}${path}`, {
+  const res = await fetch(`${API_URL}/api${path}`, {
     ...fetchOpts,
     headers,
   });

@@ -1,4 +1,5 @@
 import * as signalR from "@microsoft/signalr";
+import { API_URL } from "../config";
 
 type SignalREventHandler = (...args: unknown[]) => void;
 
@@ -6,7 +7,7 @@ class SignalRService {
   private connection: signalR.HubConnection | null = null;
   private handlers = new Map<string, SignalREventHandler[]>();
 
-  async connect(hubUrl: string = "/api/proxy/hubs/app"): Promise<void> {
+  async connect(hubUrl: string = `${API_URL}/hubs/app`): Promise<void> {
     if (this.connection?.state === signalR.HubConnectionState.Connected) return;
 
     this.connection = new signalR.HubConnectionBuilder()
